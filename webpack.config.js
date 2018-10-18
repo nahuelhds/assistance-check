@@ -10,7 +10,7 @@ const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const pkg = require("./package.json");
 
-module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
+module.exports = ({ ssr = false, lite = false }, { mode = "development" }) => {
   const production = mode === "production";
   process.env.NODE_ENV = production ? "production" : "development";
   // output filenames for main and chunks
