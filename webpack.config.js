@@ -7,12 +7,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InlineChunkManifestHtmlWebpackPlugin = require("inline-chunk-manifest-html-webpack-plugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin-loader");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
-const dotenvSafe = require("dotenv-safe").load();
 const pkg = require("./package.json");
 
-module.exports = ({ production = false, ssr = false, lite = false } = {}) => {
+module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
+  const production = mode === "production";
   process.env.NODE_ENV = production ? "production" : "development";
-
   // output filenames for main and chunks
   const output = {
     path: path.resolve(__dirname, "./build"),
@@ -42,35 +41,35 @@ module.exports = ({ production = false, ssr = false, lite = false } = {}) => {
 
   // webpack default configs
   const webpackConfig = {
+    mode,
     entry: {
       main: ["./src/main.js"],
       vendor: (lite ? [] : ["./src/stdlib.js"]).concat(["react", "react-dom"])
     },
     output,
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.(js|jsx)$/,
           include: path.resolve(__dirname, "./src"),
-          loaders: "babel-loader"
+          use: ["babel-loader"]
         }
       ]
     },
     devtool: sourceMap,
     resolve,
     plugins: [
-      new optimize.CommonsChunkPlugin({
-        name: "vendor"
-      }),
-      new optimize.CommonsChunkPlugin({
-        children: true,
-        async: "common",
-        minChunks: 2
-      }),
-      new DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-        firebaseConfig: firebaseConfig
-      }),
+      // // new optimize.CommonsChunkPlugin({
+      // //   name: "vendor"
+      // // }),
+      // // new optimize.CommonsChunkPlugin({
+      // //   children: true,
+      // //   async: "common",
+      // //   minChunks: 2
+      // // }),
+      // new DefinePlugin({
+      //   firebaseConfig: firebaseConfig
+      // }),
       new HtmlWebpackPlugin(
         Object.assign(
           {
@@ -95,18 +94,18 @@ module.exports = ({ production = false, ssr = false, lite = false } = {}) => {
             : {}
         )
       ),
-      new InlineChunkManifestHtmlWebpackPlugin({
-        filename: "chunk-manifest.json",
-        chunkManifestVariable: "webpackChunkManifest",
-        dropAsset: true
-      }),
-      new PreloadWebpackPlugin({
-        include: ["common", "greeting"]
-      }),
-      new PreloadWebpackPlugin({
-        rel: "prefetch",
-        include: ["users", "notification"]
-      }),
+      // new InlineChunkManifestHtmlWebpackPlugin({
+      //   filename: "chunk-manifest.json",
+      //   chunkManifestVariable: "webpackChunkManifest",
+      //   dropAsset: true
+      // }),
+      // new PreloadWebpackPlugin({
+      //   include: ["common", "greeting"]
+      // }),
+      // new PreloadWebpackPlugin({
+      //   rel: "prefetch",
+      //   include: ["users", "notification"]
+      // }),
       new CopyWebpackPlugin([
         {
           context: "./public",
@@ -120,19 +119,19 @@ module.exports = ({ production = false, ssr = false, lite = false } = {}) => {
           }
         }
       ]),
-      new SWPrecacheWebpackPlugin({
-        cacheId: `${pkg.name}-${pkg.version}`,
-        staticFileGlobs: [path.join(output.path, "**/*")],
-        runtimeCaching: [
-          {
-            urlPattern: /https:\/\/.+.firebaseio.com/,
-            handler: "networkFirst"
-          }
-        ],
-        logger: function() {},
-        filename: "sw.js",
-        minify: production
-      })
+      // new SWPrecacheWebpackPlugin({
+      //   cacheId: `${pkg.name}-${pkg.version}`,
+      //   staticFileGlobs: [path.join(output.path, "**/*")],
+      //   runtimeCaching: [
+      //     {
+      //       urlPattern: /https:\/\/.+.firebaseio.com/,
+      //       handler: "networkFirst"
+      //     }
+      //   ],
+      //   logger: function() {},
+      //   filename: "sw.js",
+      //   minify: production
+      // })
     ],
     devServer: {
       contentBase: "./public",
