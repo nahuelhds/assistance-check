@@ -5,12 +5,12 @@
   "author": "nahuelhds",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --https",
+    "start": "webpack-dev-server --mode=development --https",
     "prestart": "opn https://localhost:8080",
-    "build": "rm -rf build && webpack --env.production",
+    "build": "rm -rf build && webpack --mode=production",
     "build:debug": "rm -rf build && webpack",
     "deploy": "npm run build && firebase deploy",
-    "analyze": "webpack --env.production --profile --json > ./node_modules/.bundle-data.json && webpack-bundle-analyzer ./node_modules/.bundle-data.json"
+    "analyze": "webpack --mode=production --profile --json > ./node_modules/.bundle-data.json && webpack-bundle-analyzer ./node_modules/.bundle-data.json"
   },
   "dependencies": {
     "ejs": "^2.5.7",
@@ -24,22 +24,23 @@
     "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-imports": "^1.4.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react-app": "^3.0.2",
-    "copy-webpack-plugin": "^4.0.1",
-    "dotenv-safe": "^4.0.4",
-    "html-webpack-plugin": "^2.30.1",
-    "inline-chunk-manifest-html-webpack-plugin": "^1.1.1",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-imports": "^1.5.1",
+    "babel-preset-react-app-babel-7": "^4.0.2-0",
+    "copy-webpack-plugin": "^4.5.3",
+    "html-webpack-plugin": "^3.2.0",
+    "inline-chunk-manifest-html-webpack-plugin": "^2.0.0",
     "opn-cli": "^3.1.0",
-    "preload-webpack-plugin": "^2.0.0",
-    "sw-precache": "^5.2.0",
+    "preload-webpack-plugin": "^2.3.0",
+    "sw-precache": "^5.2.1",
     "sw-precache-webpack-plugin-loader": "^1.0.2",
-    "webpack": "^3.6.0",
-    "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^2.8.2"
+    "webpack": "^4.21.0",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   }
 }
