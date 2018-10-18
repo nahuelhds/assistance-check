@@ -21,7 +21,7 @@ module.exports = ({ ssr = false, lite = false } = {}, { mode = "development" }) 
   };
 
   // source map config
-  const sourceMap = production ? "cheap-module-source-map" : "source-map";
+  const sourceMap = production ? "cheap-module-source-map" : "eval"; // "source-map"
 
   // firebase configs
   const firebaseConfig = JSON.stringify({
