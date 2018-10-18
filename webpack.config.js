@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InlineChunkManifestHtmlWebpackPlugin = require("inline-chunk-manifest-html-webpack-plugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin-loader");
-const PreloadWebpackPlugin = require("preload-webpack-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const pkg = require("./package.json");
 
 module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
@@ -67,9 +67,9 @@ module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
       // //   async: "common",
       // //   minChunks: 2
       // // }),
-      // new DefinePlugin({
-      //   firebaseConfig: firebaseConfig
-      // }),
+      new DefinePlugin({
+        firebaseConfig: firebaseConfig
+      }),
       new HtmlWebpackPlugin(
         Object.assign(
           {
@@ -99,13 +99,10 @@ module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
       //   chunkManifestVariable: "webpackChunkManifest",
       //   dropAsset: true
       // }),
-      // new PreloadWebpackPlugin({
-      //   include: ["common", "greeting"]
-      // }),
-      // new PreloadWebpackPlugin({
-      //   rel: "prefetch",
-      //   include: ["users", "notification"]
-      // }),
+      new ScriptExtHtmlWebpackPlugin({
+        preload: ["common", "greeting"],
+        prefetch: ["users", "notification"]
+      }),
       new CopyWebpackPlugin([
         {
           context: "./public",
@@ -119,19 +116,19 @@ module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
           }
         }
       ]),
-      // new SWPrecacheWebpackPlugin({
-      //   cacheId: `${pkg.name}-${pkg.version}`,
-      //   staticFileGlobs: [path.join(output.path, "**/*")],
-      //   runtimeCaching: [
-      //     {
-      //       urlPattern: /https:\/\/.+.firebaseio.com/,
-      //       handler: "networkFirst"
-      //     }
-      //   ],
-      //   logger: function() {},
-      //   filename: "sw.js",
-      //   minify: production
-      // })
+      new SWPrecacheWebpackPlugin({
+        cacheId: `${pkg.name}-${pkg.version}`,
+        staticFileGlobs: [path.join(output.path, "**/*")],
+        runtimeCaching: [
+          {
+            urlPattern: /https:\/\/.+.firebaseio.com/,
+            handler: "networkFirst"
+          }
+        ],
+        logger: function() {},
+        filename: "sw.js",
+        minify: production
+      })
     ],
     devServer: {
       contentBase: "./public",
