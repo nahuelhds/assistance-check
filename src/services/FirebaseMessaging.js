@@ -1,10 +1,14 @@
-import firebase from 'firebase';
+import firebase from "firebase/app";
+import "firebase/messaging";
 
 class FirebaseMessaging {
   constructor(config = {}) {
-    config = Object.assign({
-      handleMessage: () => {}
-    }, config);
+    config = Object.assign(
+      {
+        handleMessage: () => {}
+      },
+      config
+    );
 
     if (!FirebaseMessaging.defaultApp) {
       FirebaseMessaging.defaultApp = firebase.initializeApp(config);

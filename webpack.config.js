@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InlineChunkManifestHtmlWebpackPlugin = require("inline-chunk-manifest-html-webpack-plugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin-loader");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const pkg = require("./package.json");
 
 module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
@@ -58,15 +59,43 @@ module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
     },
     devtool: sourceMap,
     resolve,
+    optimization: {
+      // splitChunks: {
+      //   cacheGroups: {
+      //     commons: {
+      //       name: 'commons',
+      //       chunks: 'initial',
+      //       minChunks: 2
+      //     }
+      //   }
+      // },
+      minimize: production,
+      minimizer: [
+        // https://webpack.js.org/plugins/uglifyjs-webpack-plugin/
+        new UglifyJsPlugin({
+          sourceMap: true,
+          uglifyOptions: {
+            mangle: true,
+            // http://lisperator.net/uglifyjs/compress
+            compress: {
+              unused: true,
+              dead_code: true,
+              warnings: false,
+              drop_debugger: true,
+              conditionals: true,
+              evaluate: true,
+              drop_console: true,
+              sequences: true,
+              booleans: true
+            },
+            beautify: false,
+            comments: false
+          },
+          extractComments: true
+        })
+      ]
+    },
     plugins: [
-      // // new optimize.CommonsChunkPlugin({
-      // //   name: "vendor"
-      // // }),
-      // // new optimize.CommonsChunkPlugin({
-      // //   children: true,
-      // //   async: "common",
-      // //   minChunks: 2
-      // // }),
       new DefinePlugin({
         firebaseConfig: firebaseConfig
       }),
@@ -144,26 +173,6 @@ module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
   // webpack additional build for production ready version
   if (production) {
     webpackConfig.plugins = webpackConfig.plugins.concat([
-      // https://webpack.js.org/plugins/uglifyjs-webpack-plugin/
-      new optimize.UglifyJsPlugin({
-        sourceMap,
-        mangle: true,
-        beautify: false,
-        comments: false,
-        // http://lisperator.net/uglifyjs/compress
-        compress: {
-          unused: true,
-          dead_code: true,
-          warnings: false,
-          drop_debugger: true,
-          conditionals: true,
-          evaluate: true,
-          drop_console: true,
-          sequences: true,
-          booleans: true
-        },
-        extractComments: true
-      }),
       new LoaderOptionsPlugin({
         minimize: true,
         debug: false
