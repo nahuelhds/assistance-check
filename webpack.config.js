@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InlineChunkManifestHtmlWebpackPlugin = require("inline-chunk-manifest-html-webpack-plugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin-loader");
-const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const pkg = require("./package.json");
 
 module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
@@ -99,9 +99,12 @@ module.exports = (env, { mode = "development", ssr = false, lite = false }) => {
       //   chunkManifestVariable: "webpackChunkManifest",
       //   dropAsset: true
       // }),
-      new ScriptExtHtmlWebpackPlugin({
-        preload: ["common", "greeting"],
-        prefetch: ["users", "notification"]
+      new PreloadWebpackPlugin({
+        include: ["common", "greeting"]
+      }),
+      new PreloadWebpackPlugin({
+        rel: "prefetch",
+        include: ["users", "notification"]
       }),
       new CopyWebpackPlugin([
         {

@@ -35,7 +35,7 @@
     "inline-chunk-manifest-html-webpack-plugin": "^2.0.0",
     "opn": "^5.4.0",
     "opn-cli": "^3.1.0",
-    "script-ext-html-webpack-plugin": "^2.0.1",
+    "preload-webpack-plugin": "^3.0.0-beta.2",
     "sw-precache": "^5.2.1",
     "sw-precache-webpack-plugin-loader": "^1.0.2",
     "webpack": "^4.21.0",
