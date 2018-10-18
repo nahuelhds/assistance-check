@@ -18,6 +18,7 @@
           "preventFullImport": true
         }
       }
-    ]
+    ],
+    "react-hot-loader/babel"
   ]
 }
