@@ -5,7 +5,7 @@
   "author": "nahuelhds",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode=development --https",
+    "start": "webpack-dev-server --mode=development --https --hot",
     "prestart": "opn https://localhost:8080",
     "build": "rm -rf build && webpack --mode=production",
     "build:debug": "rm -rf build && webpack",
@@ -15,6 +15,7 @@
   "dependencies": {
     "ejs": "^2.5.7",
     "firebase": "^5.5.4",
+    "loadable-components": "^2.2.3",
     "material-ui": "^0.19.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -36,6 +37,7 @@
     "opn": "^5.4.0",
     "opn-cli": "^3.1.0",
     "preload-webpack-plugin": "^3.0.0-beta.2",
+    "react-hot-loader": "^4.3.11",
     "sw-precache": "^5.2.1",
     "sw-precache-webpack-plugin-loader": "^1.0.2",
     "uglifyjs-webpack-plugin": "^2.0.1",

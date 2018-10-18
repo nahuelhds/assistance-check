@@ -1,22 +1,21 @@
 import React from 'react';
+import { hot } from 'react-hot-loader'
+import loadable from "loadable-components";
 import {HashRouter as Router, Route} from 'react-router-dom';
-import asyncComponent from './AsyncComponent';
+
 import AppShell from './AppShell';
 
-const Greeting = asyncComponent(() => {
-  return import(/* webpackChunkName: "greeting" */ './Greeting')
-    .then(module => module.default);
-});
+const Greeting = loadable(() =>
+  import(/* webpackChunkName: "greeting" */ "./Greeting")
+);
 
-const Users = asyncComponent(() => {
-  return import(/* webpackChunkName: "users" */ './Users')
-    .then(module => module.default);
-});
+const Users = loadable(() =>
+  import(/* webpackChunkName: "users" */ "./Users")
+);
 
-const Notification = asyncComponent(() => {
-  return import(/* webpackChunkName: "notification" */ './Notification')
-    .then(module => module.default);
-});
+const Notification = loadable(() =>
+  import(/* webpackChunkName: "notification" */ "./Notification")
+);
 
 class App extends React.Component {
   render() {
@@ -34,4 +33,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default hot(module)(App);
