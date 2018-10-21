@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Avatar, Dialog, FlatButton, TextField, FloatingActionButton} from 'material-ui';
+import {Dialog, Button, TextField} from '@material-ui/core';
 import User from './User'
 import usersDatabase from '../services/UsersDatabase';
 import {ContentAddIcon} from './Icons';
@@ -85,12 +85,12 @@ class Users extends React.Component {
 		return (
 			<div>
 				{users()}
-				<FloatingActionButton style={fabStyle} onTouchTap={this.handleOpenDialog}>
+				<Button variant="fab" style={fabStyle} onTouchTap={this.handleOpenDialog}>
 					<ContentAddIcon/>
-				</FloatingActionButton>
+				</Button>
 				<Dialog
 					title="Adding New User"
-					actions={<FlatButton label="Submit" primary={true} onTouchTap={this.handleSubmit}/>}
+					actions={<Button variant="text" label="Submit" primary={true} onTouchTap={this.handleSubmit}/>}
 					modal={false}
 					open={this.state.dialog}
 					onRequestClose={this.handleCloseDialog}

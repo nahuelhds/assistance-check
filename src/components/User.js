@@ -1,6 +1,6 @@
 import React from 'react';
-import {Avatar} from 'material-ui';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
+import {Avatar} from '@material-ui/core';
+import {Card, CardHeader, CardText} from '@material-ui/core/Card';
 import usersDatabase from '../services/UsersDatabase';
 import {AvatarIcon} from './Icons';
 

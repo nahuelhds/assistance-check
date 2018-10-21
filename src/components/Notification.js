@@ -1,6 +1,6 @@
 import React from 'react';
-import {Card, CardText, CardTitle} from 'material-ui/Card';
-import {TextField, Snackbar} from 'material-ui';
+import {Card, CardText, CardTitle} from '@material-ui/core/Card';
+import {TextField, Snackbar} from '@material-ui/core';
 import FirebaseMessaging from '../services/FirebaseMessaging';
 
 class Notification extends React.Component {

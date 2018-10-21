@@ -1,26 +1,33 @@
-import React from 'react';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+} from "@material-ui/core";
 
 class Greeting extends React.Component {
-  render () {
+  render() {
     return (
-      <div>
-        <Card>
-          <CardTitle title="Hello! World"/>
-          <CardText>
-            You will have a work:
-            <ul>
-              <li>Web Manifest for installing</li>
-              <li>Service Worker for caching and offline</li>
-              <li>Application Shell powered by <a href="https://material-ui.com">material-ui</a></li>
-              <li>PRPL pattern by code splitting</li>
-              <li>Opt in ES2015</li>
-            </ul>
-          </CardText>
-        </Card>
-      </div>
-    )
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            Hello! World
+          </Typography>
+          <Typography variant="subtitle1" component="p" gutterBottom>You will have a work:</Typography>
+          <Typography component="ul">
+            <li>Web Manifest for installing</li>
+            <li>Service Worker for caching and offline</li>
+            <li>
+              Application Shell powered by&nbsp;
+              <a href="https://material-ui.com">material-ui</a>
+            </li>
+            <li>PRPL pattern by code splitting</li>
+            <li>Opt in ES2015</li>
+          </Typography>
+        </CardContent>
+      </Card>
+    );
   }
-};
+}
 
 export default Greeting;
