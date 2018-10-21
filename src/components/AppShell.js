@@ -12,7 +12,11 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  CssBaseline
+  CssBaseline,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { GreetingIcon, UsersIcon, NotificationIcon } from "./Icons";
@@ -27,30 +31,31 @@ class SidebarDrawer extends React.Component {
 
   render() {
     return (
-      <Drawer
-        docked={false}
-        width={200}
-        open={this.props.open}
-        onRequestChange={this.props.onRequestChange}
-      >
-        <MenuItem
-          primaryText={"Greeting"}
-          leftIcon={<GreetingIcon />}
-          containerElement={<Link to={"/"} />}
-          onClick={this.props.onClick}
-        />
-        <MenuItem
-          primaryText={"Users"}
-          leftIcon={<UsersIcon />}
-          containerElement={<Link to={"/users"} />}
-          onClick={this.props.onClick}
-        />
-        <MenuItem
-          primaryText={"Notification"}
-          leftIcon={<NotificationIcon />}
-          containerElement={<Link to={"/notification"} />}
-          onClick={this.props.onClick}
-        />
+      <Drawer open={this.props.open}>
+        <List>
+          <ListItem component={Link} to={"/"} onClick={this.props.onClick}>
+            <ListItemIcon>
+              <GreetingIcon />
+            </ListItemIcon>
+            <ListItemText>Greeting</ListItemText>
+          </ListItem>
+          <ListItem component={Link} to={"/users"} onClick={this.props.onClick}>
+            <ListItemIcon>
+              <UsersIcon />
+            </ListItemIcon>
+            <ListItemText>Users</ListItemText>
+          </ListItem>
+          <ListItem
+            component={Link}
+            to={"/notification"}
+            onClick={this.props.onClick}
+          >
+            <ListItemIcon>
+              <NotificationIcon />
+            </ListItemIcon>
+            <ListItemText>Notification</ListItemText>
+          </ListItem>
+        </List>
       </Drawer>
     );
   }
@@ -96,7 +101,6 @@ class AppShell extends Component {
         open={this.state.open}
         onMounted={() => this.setState({ open: true })}
         onClick={() => this.setState({ open: false })}
-        onRequestChange={open => this.setState({ open: open })}
       />
     );
 
@@ -116,7 +120,6 @@ class AppShell extends Component {
               >
                 <MenuIcon />
               </IconButton>
-
               <Typography variant="h6" color="inherit" noWrap>
                 {this.props.title}
               </Typography>
