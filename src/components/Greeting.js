@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-} from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 class Greeting extends React.Component {
   render() {
@@ -13,7 +9,9 @@ class Greeting extends React.Component {
           <Typography variant="h5" component="h2">
             Hello! World
           </Typography>
-          <Typography variant="subtitle1" component="p" gutterBottom>You will have a work:</Typography>
+          <Typography variant="subtitle1" component="p" gutterBottom>
+            You will have a work:
+          </Typography>
           <Typography component="ul">
             <li>Web Manifest for installing</li>
             <li>Service Worker for caching and offline</li>
