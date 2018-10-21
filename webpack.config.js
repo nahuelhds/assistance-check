@@ -1,16 +1,19 @@
 "use strict";
 
 const path = require("path");
-const { LoaderOptionsPlugin, DefinePlugin, optimize } = require("webpack");
+const { LoaderOptionsPlugin, DefinePlugin } = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const InlineChunkManifestHtmlWebpackPlugin = require("inline-chunk-manifest-html-webpack-plugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin-loader");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const pkg = require("./package.json");
+require("dotenv-safe").config();
 
-module.exports = ({ ssr = false, lite = false } = {}, { mode = "development" }) => {
+module.exports = (
+  { ssr = false, lite = false } = {},
+  { mode = "development" }
+) => {
   const production = mode === "production";
   process.env.NODE_ENV = production ? "production" : "development";
   // output filenames for main and chunks

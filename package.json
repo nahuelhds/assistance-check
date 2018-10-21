@@ -32,6 +32,7 @@
     "babel-plugin-transform-imports": "^1.5.1",
     "babel-preset-react-app-babel-7": "^4.0.2-0",
     "copy-webpack-plugin": "^4.5.3",
+    "dotenv-safe": "^6.1.0",
     "html-webpack-plugin": "^3.2.0",
     "inline-chunk-manifest-html-webpack-plugin": "^2.0.0",
     "opn": "^5.4.0",
