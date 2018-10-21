@@ -45,7 +45,7 @@ module.exports = ({ ssr = false, lite = false } = {}, { mode = "development" }) 
     mode,
     entry: {
       main: ["./src/main.js"],
-      vendor: (lite ? [] : ["./src/stdlib.js"]).concat(["react", "react-dom"])
+      vendor: ["react", "react-dom"]
     },
     output,
     module: {

@@ -13,15 +13,15 @@
     "analyze": "webpack --mode=production --profile --json > ./node_modules/.bundle-data.json && webpack-bundle-analyzer ./node_modules/.bundle-data.json"
   },
   "dependencies": {
-    "ejs": "^2.5.7",
+    "@material-ui/core": "^3.3.0",
+    "@material-ui/icons": "^3.0.1",
+    "ejs": "^2.6.1",
     "firebase": "^5.5.4",
     "loadable-components": "^2.2.3",
-    "material-ui": "^0.19.2",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-lite": "^0.15.38",
-    "react-router-dom": "4.2.2",
-    "react-tap-event-plugin": "^2.0.1"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-lite": "^0.15.39",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
