@@ -8,11 +8,9 @@ class Notification extends React.Component {
   constructor(props) {
     super(props);
 
-    this.message = new FirebaseMessaging(
-      Object.assign(firebaseConfig, {
-        handleMessage: this.handleMessage.bind(this)
-      })
-    );
+    this.message = new FirebaseMessaging({
+      handleMessage: this.handleMessage.bind(this)
+    });
 
     this.state = {
       token: "",
@@ -23,7 +21,7 @@ class Notification extends React.Component {
 
   componentDidMount() {
     this.message
-      .requirestPermission()
+      .requestPermission()
       .then(token => {
         this.setState({ token });
       })

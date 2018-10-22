@@ -1,16 +1,9 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
+import FirebaseApp from "./Firebase";
 
 class UsersDatabase {
-  constructor(config = {}) {
-    if (!UsersDatabase.defaultApp) {
-      UsersDatabase.defaultApp = firebase.initializeApp(config);
-    }
-    this.firestore = firebase.firestore();
-    this.firestore.settings({
-      timestampsInSnapshots: true
-    });
-    this.usersCollection = this.firestore.collection("users");
+  constructor() {
+    const firestore = new FirebaseApp().firestore();
+    this.usersCollection = firestore.collection("users");
     this.users = {};
   }
 
@@ -39,6 +32,7 @@ class UsersDatabase {
       .finally(() => this.users);
 }
 
+UsersDatabase.defaultApp = undefined;
 UsersDatabase.defaultApp = undefined;
 let usersDatabaseSingleton = null;
 

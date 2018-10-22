@@ -41,7 +41,7 @@ class Users extends React.Component {
   }
 
   static database() {
-    return usersDatabase(firebaseConfig);
+    return usersDatabase();
   }
 
   componentDidMount() {
