@@ -26,11 +26,14 @@ module.exports = (
   // source map config
   const sourceMap = production ? "cheap-module-source-map" : "source-map"; // "eval"
 
-  // firebase configs
+  // firebase configsFIREBASE_API_KEY="AIzaSyBbSQlo0_4yjcJee1Ot_64qx4tR0WG5hq0"
   const firebaseConfig = JSON.stringify({
     apiKey: process.env.FIREBASE_API_KEY,
-    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-    databaseURL: process.env.FIREBASE_DATABASE_URL
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
   });
 
   // redirect the request of importing react to react-lite

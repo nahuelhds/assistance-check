@@ -9,13 +9,18 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
+  ListItem,
+  List
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import User from "./User";
 import usersDatabase from "../services/UsersDatabase";
 
 const styles = theme => ({
+  container: {
+    flexGrow: 1
+  },
   button: {
     position: "fixed",
     bottom: theme.spacing.unit,
@@ -42,7 +47,9 @@ class Users extends React.Component {
   componentDidMount() {
     Users.database()
       .get()
-      .then(users => this.setState({ users }))
+      .then(users => {
+        this.setState({ users });
+      })
       .catch(err => {
         console.log(err);
       });
@@ -94,67 +101,86 @@ class Users extends React.Component {
   render() {
     const users = () => {
       if (!this.state.users) {
-        return;
+        return null;
       }
 
       if (this.props.match.params.id) {
-        return <User user={this.state.users[this.props.match.params.id]} />;
+        return (
+          <List>
+            <ListItem>
+              <User user={this.state.users[this.props.match.params.id]} />
+            </ListItem>
+          </List>
+        );
       }
 
-      return Object.keys(this.state.users).map(id => {
-        return (
-          <Link key={id} to={`/users/${id}`}>
-            <User user={this.state.users[id]} />
-          </Link>
-        );
-      });
+      return (
+        <List>
+          {Object.keys(this.state.users).map(id => (
+            <ListItem button component={Link} to={`/users/${id}`} key={id}>
+              <User user={this.state.users[id]} />
+            </ListItem>
+          ))}
+        </List>
+      );
     };
 
-    const { classes } = this.props;
+    const addButton = () => {
+      if (this.props.match.params.id) {
+        return null;
+      }
+
+      const { classes } = this.props;
+      return (
+        <React.Fragment>
+          <Button
+            className={classes.button}
+            variant="fab"
+            color="primary"
+            aria-label="Add"
+            onClick={this.handleOpenDialog}
+          >
+            <AddIcon />
+          </Button>
+          <Dialog open={this.state.dialog} onClose={this.handleCloseDialog}>
+            <DialogTitle>Adding New User</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Input your name and email address.
+              </DialogContentText>
+              <TextField
+                margin="dense"
+                autoFocus
+                fullWidth
+                label="Name"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleInputChange}
+              />
+              <TextField
+                margin="dense"
+                fullWidth
+                label="Email"
+                name="email"
+                type="email"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button color="primary" onClick={this.handleSubmit}>
+                Submit
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </React.Fragment>
+      );
+    };
     return (
-      <div>
+      <React.Fragment>
         {users()}
-        <Button
-          className={classes.button}
-          variant="fab"
-          color="primary"
-          aria-label="Add"
-          onClick={this.handleOpenDialog}
-        >
-          <AddIcon />
-        </Button>
-        <Dialog open={this.state.dialog} onClose={this.handleCloseDialog}>
-          <DialogTitle>Adding New User</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Input your name and email address.
-            </DialogContentText>
-            <TextField
-              margin="dense"
-              autoFocus
-              fullWidth
-              label="Name"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-            />
-            <TextField
-              margin="dense"
-              fullWidth
-              label="Email"
-              name="email"
-              type="email"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={this.handleSubmit}>
-              Submit
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+        {addButton()}
+      </React.Fragment>
     );
   }
 }
