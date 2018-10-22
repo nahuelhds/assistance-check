@@ -2,20 +2,19 @@ import FirebaseApp from "./Firebase";
 
 class FirebaseMessaging {
   constructor(config = {}) {
+    this.messaging = new FirebaseApp().messaging();
     this.handleMessage = config.handleMessage;
   }
 
   requestPermission() {
-    const messaging = new FirebaseApp().messaging();
-
     if (this.handleMessage) {
-      messaging.onMessage(this.handleMessage);
+      this.messaging.onMessage(this.handleMessage);
     }
 
-    return messaging.requestPermission().then(() => messaging.getToken());
+    return this.messaging
+      .requestPermission()
+      .then(() => this.messaging.getToken());
   }
 }
-
-FirebaseMessaging.defaultApp = undefined;
 
 export default FirebaseMessaging;

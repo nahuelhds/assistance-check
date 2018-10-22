@@ -32,8 +32,6 @@ class UsersDatabase {
       .finally(() => this.users);
 }
 
-UsersDatabase.defaultApp = undefined;
-UsersDatabase.defaultApp = undefined;
 let usersDatabaseSingleton = null;
 
 export default function(opts) {
