@@ -1,17 +1,15 @@
-import React from 'react';
-import { hot } from 'react-hot-loader'
+import React from "react";
+import { hot } from "react-hot-loader";
 import loadable from "loadable-components";
-import {HashRouter as Router, Route} from 'react-router-dom';
+import { HashRouter as Router, Route } from "react-router-dom";
 
-import AppShell from './AppShell';
+import AppShell from "./AppShell";
 
 const Greeting = loadable(() =>
   import(/* webpackChunkName: "greeting" */ "./Greeting")
 );
 
-const Users = loadable(() =>
-  import(/* webpackChunkName: "users" */ "./Users")
-);
+const Users = loadable(() => import(/* webpackChunkName: "users" */ "./Users"));
 
 const Notification = loadable(() =>
   import(/* webpackChunkName: "notification" */ "./Notification")
@@ -23,9 +21,9 @@ class App extends React.Component {
       <Router>
         <AppShell>
           <div>
-            <Route exact path="/" component={Greeting}/>
-            <Route path="/users/:id?" component={Users}/>
-            <Route path="/notification" component={Notification}/>
+            <Route exact path="/" component={Greeting} />
+            <Route path="/users/:id?" component={Users} />
+            <Route path="/notification" component={Notification} />
           </div>
         </AppShell>
       </Router>

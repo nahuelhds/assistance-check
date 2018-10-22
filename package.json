@@ -13,15 +13,16 @@
     "analyze": "webpack --mode=production --profile --json > ./node_modules/.bundle-data.json && webpack-bundle-analyzer ./node_modules/.bundle-data.json"
   },
   "dependencies": {
-    "ejs": "^2.5.7",
+    "@material-ui/core": "^3.3.0",
+    "@material-ui/icons": "^3.0.1",
+    "ejs": "^2.6.1",
     "firebase": "^5.5.4",
     "loadable-components": "^2.2.3",
-    "material-ui": "^0.19.2",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-lite": "^0.15.38",
-    "react-router-dom": "4.2.2",
-    "react-tap-event-plugin": "^2.0.1"
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-lite": "^0.15.39",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -32,6 +33,7 @@
     "babel-plugin-transform-imports": "^1.5.1",
     "babel-preset-react-app-babel-7": "^4.0.2-0",
     "copy-webpack-plugin": "^4.5.3",
+    "dotenv-safe": "^6.1.0",
     "html-webpack-plugin": "^3.2.0",
     "inline-chunk-manifest-html-webpack-plugin": "^2.0.0",
     "opn": "^5.4.0",
