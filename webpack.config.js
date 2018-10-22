@@ -24,7 +24,7 @@ module.exports = (
   };
 
   // source map config
-  const sourceMap = production ? "cheap-module-source-map" : "eval"; // "source-map"
+  const sourceMap = production ? "cheap-module-source-map" : "source-map"; // "eval"
 
   // firebase configs
   const firebaseConfig = JSON.stringify({

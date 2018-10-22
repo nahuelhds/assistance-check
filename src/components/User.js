@@ -1,6 +1,7 @@
 import React from "react";
-import { Avatar } from "@material-ui/core";
-import { Card, CardHeader, CardText } from "@material-ui/core/Card";
+import PropTypes from "prop-types";
+import { Avatar } from "@material-ui/core/Avatar";
+import { Card, CardHeader } from "@material-ui/core/Card";
 import usersDatabase from "../services/UsersDatabase";
 import { AvatarIcon } from "./Icons";
 
@@ -42,7 +43,7 @@ class User extends React.Component {
       <Card style={style}>
         <CardHeader
           title={this.state.user ? this.state.user.name : ""}
-          subtitle={this.state.user ? this.state.user.email : ""}
+          subheader={this.state.user ? this.state.user.email : ""}
           avatar={<Avatar icon={<AvatarIcon />} />}
         />
       </Card>
@@ -51,7 +52,7 @@ class User extends React.Component {
 }
 
 User.propTypes = {
-  user: React.PropTypes.object
+  user: PropTypes.object
 };
 
 export default User;

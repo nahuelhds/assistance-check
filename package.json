@@ -18,6 +18,7 @@
     "ejs": "^2.6.1",
     "firebase": "^5.5.4",
     "loadable-components": "^2.2.3",
+    "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-lite": "^0.15.39",

@@ -8,7 +8,6 @@ import {
 import {
   AppBar,
   Drawer,
-  MenuItem,
   Toolbar,
   IconButton,
   Typography,
@@ -19,7 +18,9 @@ import {
   ListItemText
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { GreetingIcon, UsersIcon, NotificationIcon } from "./Icons";
+import AppsIcon from "@material-ui/icons/Apps";
+import PeopleIcon from "@material-ui/icons/People";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
 class SidebarDrawer extends React.Component {
   componentDidMount() {
@@ -35,13 +36,13 @@ class SidebarDrawer extends React.Component {
         <List>
           <ListItem component={Link} to={"/"} onClick={this.props.onClick}>
             <ListItemIcon>
-              <GreetingIcon />
+              <AppsIcon />
             </ListItemIcon>
             <ListItemText>Greeting</ListItemText>
           </ListItem>
           <ListItem component={Link} to={"/users"} onClick={this.props.onClick}>
             <ListItemIcon>
-              <UsersIcon />
+              <PeopleIcon />
             </ListItemIcon>
             <ListItemText>Users</ListItemText>
           </ListItem>
@@ -51,7 +52,7 @@ class SidebarDrawer extends React.Component {
             onClick={this.props.onClick}
           >
             <ListItemIcon>
-              <NotificationIcon />
+              <NotificationsIcon />
             </ListItemIcon>
             <ListItemText>Notification</ListItemText>
           </ListItem>
