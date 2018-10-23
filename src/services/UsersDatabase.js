@@ -34,9 +34,9 @@ class UsersDatabase {
 
 let usersDatabaseSingleton = null;
 
-export default function(opts) {
+export default function() {
   if (!usersDatabaseSingleton) {
-    usersDatabaseSingleton = new UsersDatabase(opts);
+    usersDatabaseSingleton = new UsersDatabase();
   }
 
   return usersDatabaseSingleton;

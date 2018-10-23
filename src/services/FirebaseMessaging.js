@@ -2,8 +2,9 @@ import FirebaseApp from "./Firebase";
 
 class FirebaseMessaging {
   constructor(config = {}) {
+    config = Object.assign({ handleMessage: () => {} }, config);
     this.messaging = new FirebaseApp().messaging();
-    this.handleMessage = config.handleMessage;
+    this.handleMessage = config.handleMessage ;
   }
 
   requestPermission() {
